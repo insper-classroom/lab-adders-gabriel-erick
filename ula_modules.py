@@ -26,8 +26,16 @@ def halfAdder(a, b, soma, carry):
     """
     @always_comb
     def comb():
-        pass
-
+        if a and b:
+            soma.next = 0
+            carry.next = 1
+        elif not a and not b:
+            soma.next = 0
+            carry.next = 0
+        else:
+            soma.next = 1
+            carry.next = 0
+        
     return instances()
 
 
