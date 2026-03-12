@@ -52,7 +52,18 @@ def fullAdder(a, b, c, soma, carry):
     """
     @always_comb
     def comb():
-        pass
+        if a and b and c:
+            soma.next = 1
+            carry.next = 1
+        elif (a and b) or (a and c) or (b and c):
+            soma.next = 0
+            carry.next = 1
+        elif (a and not b and not c) or (not a and b and not c) or (not a and not b and c):
+            soma.next = 1
+            carry.next = 0
+        else:
+            soma.next = 0
+            carry.next = 0
 
     return instances()
 
