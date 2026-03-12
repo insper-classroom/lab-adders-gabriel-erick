@@ -77,17 +77,13 @@ def adder2bits(x, y, soma, carry):
 
 @block
 def adder(x, y, soma, carry):
-    """Somador generico para vetores de mesmo tamanho.
+    s = [Signal(bool(0)) for i in range(len(x) - 1)]
+    hallist = [None for i in range(len(x))]
+    hallist[0] = halfAdder(x[0], y[0], soma[0], s[0]),
 
-    Implementacao esperada por ripple-carry (encadeamento de carries)
-    usando celulas de full adder.
-
-    Args:
-        x: Vetor de entrada.
-        y: Vetor de entrada.
-        soma: Vetor de saida com mesma largura de x/y.
-        carry: Carry de saida mais significativo.
-    """
+    for e in range(1, len(x)- 1):
+        hallist[e] = fullAdder(x[e], y[e], s[e-1], soma[e], s[e])
+    hallist[-1] = fullAdder(x[-1], y[-1], s[-1], soma[-1], carry)
     return instances()
 
 
