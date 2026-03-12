@@ -41,16 +41,14 @@ def halfAdder(a, b, soma, carry):
 
 @block
 def fullAdder(a, b, c, soma, carry):
-    s1 = Signal(bool(0)) # (1)
-    s2 = Signal(bool(0)) 
-    s3 = Signal(bool(0))
+    s = [Signal(bool(0)) for i in range(4)]
 
-    half_1 = halfAdder(a, b, s1, s2) 
-    half_2 = halfAdder(c, s1, soma, s3) 
+    half_1 = halfAdder(a, b, s[1], s[2]) 
+    half_2 = halfAdder(c, s[1], soma, s[3])
 
     @always_comb
     def comb():
-        carry.next = s2 | s3 
+        carry.next = s[2] | s[3]
 
     return instances()
 
